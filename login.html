@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vignesh Admin Login</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron',sans-serif;
+}
+
+body{
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+radial-gradient(circle at top left,#ff007744,transparent 35%),
+radial-gradient(circle at bottom right,#00f0ff44,transparent 35%),
+#030107;
+
+overflow:hidden;
+
+}
+
+body::before{
+
+content:'';
+
+position:absolute;
+
+width:600px;
+height:600px;
+
+background:
+radial-gradient(
+circle,
+rgba(255,0,127,.15),
+transparent 70%
+);
+
+top:-250px;
+left:-250px;
+
+}
+
+body::after{
+
+content:'';
+
+position:absolute;
+
+width:600px;
+height:600px;
+
+background:
+radial-gradient(
+circle,
+rgba(0,240,255,.15),
+transparent 70%
+);
+
+bottom:-250px;
+right:-250px;
+
+}
+
+.login-container{
+
+position:relative;
+z-index:2;
+
+width:420px;
+
+padding:40px;
+
+background:
+rgba(10,10,20,.85);
+
+backdrop-filter:blur(25px);
+
+border-radius:20px;
+
+border:1px solid rgba(0,240,255,.15);
+
+box-shadow:
+0 0 30px rgba(0,240,255,.12),
+0 0 50px rgba(255,0,127,.08);
+
+}
+
+.logo{
+
+text-align:center;
+font-size:60px;
+
+margin-bottom:10px;
+
+}
+
+h1{
+
+text-align:center;
+
+color:#00f0ff;
+
+margin-bottom:25px;
+
+font-size:28px;
+
+}
+
+.input-box{
+
+margin-bottom:18px;
+
+}
+
+.input-box label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:13px;
+
+color:#aaa;
+
+}
+
+.input-box input{
+
+width:100%;
+
+padding:14px;
+
+background:#0d1322;
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:10px;
+
+outline:none;
+
+color:white;
+
+font-size:14px;
+
+}
+
+.input-box input:focus{
+
+border-color:#00f0ff;
+
+box-shadow:
+0 0 10px rgba(0,240,255,.25);
+
+}
+
+.login-btn{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:bold;
+
+color:white;
+
+background:
+linear-gradient(
+45deg,
+#ff007f,
+#00f0ff
+);
+
+transition:.3s;
+
+}
+
+.login-btn:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+0 0 15px rgba(0,240,255,.3);
+
+}
+
+#msg{
+
+text-align:center;
+
+margin-top:15px;
+
+font-size:13px;
+
+color:#00f0ff;
+
+min-height:20px;
+
+}
+
+.footer{
+
+text-align:center;
+
+margin-top:20px;
+
+font-size:11px;
+
+color:#666;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<div class="logo">
+🔐
+</div>
+
+<h1>Admin Login</h1>
+
+<div class="input-box">
+
+<label>Email</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email">
+
+</div>
+
+<div class="input-box">
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+</div>
+
+<button
+class="login-btn"
+onclick="login()">
+
+LOGIN
+
+</button>
+
+<p id="msg"></p>
+
+<div class="footer">
+Vignesh Portfolio Admin Panel
+</div>
+
+</div>
+
+<script>
+
+/* ==========================
+   SUPABASE CONFIG
+========================== */
+
+const supabaseUrl =
+"PROJECT URL";
+
+const supabaseKey =
+"ANON KEY";
+
+const supabaseClient =
+window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+/* ==========================
+   AUTO SESSION CHECK
+========================== */
+
+async function checkSession(){
+
+const {
+data:{session}
+}
+=
+await supabaseClient
+.auth
+.getSession();
+
+if(session){
+
+window.location.href =
+"dashboard.html";
+
+}
+
+}
+
+checkSession();
+
+/* ==========================
+   LOGIN FUNCTION
+========================== */
+
+async function login(){
+
+const email =
+document
+.getElementById(
+"email"
+)
+.value
+.trim();
+
+const password =
+document
+.getElementById(
+"password"
+)
+.value
+.trim();
+
+if(!email || !password){
+
+document
+.getElementById(
+"msg"
+)
+innerText =
+"Enter Email & Password";
+
+return;
+
+}
+
+document
+.getElementById(
+"msg"
+)
+innerText =
+"Logging In...";
+
+const {
+data,
+error
+}
+=
+await supabaseClient
+.auth
+.signInWithPassword({
+
+email,
+password
+
+});
+
+if(error){
+
+document
+.getElementById(
+"msg"
+)
+innerText =
+error.message;
+
+return;
+
+}
+
+document
+.getElementById(
+"msg"
+)
+innerText =
+"Login Successful";
+
+setTimeout(()=>{
+
+window.location.href =
+"dashboard.html";
+
+},1000);
+
+}
+
+/* ==========================
+   ENTER KEY LOGIN
+========================== */
+
+document
+.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Enter"){
+
+login();
+
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
