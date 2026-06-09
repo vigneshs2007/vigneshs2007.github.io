@@ -1,333 +1,97 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vignesh | Personal Cyber Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Base Global Reset Layer */
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { 
-            background: #030107; 
-            color: #fff; 
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #0e0522 0%, #030107 100%);
-            min-height: 100vh;
-        }
-
-        /* Ambient Cosmic Particle Glow Simulation Background */
-        .ambient-universe {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 15% 25%, rgba(255, 0, 127, 0.15) 0%, transparent 45%),
-                        radial-gradient(circle at 85% 75%, rgba(0, 240, 255, 0.12) 0%, transparent 45%);
-            z-index: -1; pointer-events: none;
-        }
-
-        /* Vertical Page Scroll Container Engine */
-        .scroll-wrapper {
-            display: flex; flex-direction: column; align-items: center; padding: 50px 20px; gap: 90px;
-        }
-
-        .perspective-layout {
-            perspective: 1200px; width: 100%; max-width: 1050px;
-        }
-
-        /* Core Glassmorphic Neon Panel Board Layout */
-        .neon-card-board {
-            background: rgba(8, 4, 18, 0.85);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            width: 100%;
-            min-height: 530px;
-            border-radius: 24px;
-            border: 2px solid rgba(0, 240, 255, 0.22);
-            box-shadow: 0 30px 65px rgba(0,0,0,0.85), 0 0 35px rgba(255, 0, 127, 0.12);
-            padding: 40px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* Curved Top Active Menu Navigation Link Hub */
-        .navigation-top {
-            display: flex; justify-content: center; margin-bottom: 35px; position: relative; z-index: 10;
-        }
-        .curved-bridge {
-            background: rgba(14, 8, 30, 0.75);
-            border: 1px solid rgba(255, 0, 127, 0.35);
-            border-top: none;
-            padding: 10px 35px;
-            border-radius: 0 0 25px 25px;
-            display: flex; gap: 25px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-        }
-        .curved-bridge a {
-            color: #b1adcb; text-decoration: none; font-size: 13px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; cursor: pointer;
-        }
-        .curved-bridge a:hover, .curved-bridge a.active {
-            color: #ff007f; text-shadow: 0 0 10px #ff007f;
-        }
-
-        /* Structural Core Framework 3-Column Split Mapping */
-        .panel-structure-grid {
-            display: grid; grid-template-columns: 50px 1fr 280px; gap: 35px; align-items: center;
-        }
-
-        /* Vertical Social Icon Dock Panel (Left) */
-        .vertical-social-dock {
-            display: flex; flex-direction: column; gap: 20px; align-items: center;
-            border-right: 1px solid rgba(255,255,255,0.06); padding-right: 15px;
-        }
-        .vertical-social-dock a { color: #8e88aa; font-size: 19px; transition: 0.3s; text-decoration: none; }
-        .vertical-social-dock a:hover { color: #00f0ff; transform: scale(1.2); filter: drop-shadow(0 0 8px #00f0ff); }
-
-        /* Main Typography Panel Content Text nodes */
-        .typography-panel h1 {
-            font-family: 'Orbitron', sans-serif; font-size: 44px; font-weight: 700; line-height: 1.2; margin-bottom: 15px; letter-spacing: 1px;
-        }
-        .typography-panel h1 span {
-            background: linear-gradient(45deg, #ff007f, #00f0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .typography-panel p { color: #aaa5c1; font-size: 14.5px; line-height: 1.7; margin-bottom: 25px; }
-
-        /* Action Tech Glow Button */
-        .neon-glow-btn {
-            background: transparent; border: 2px solid #00f0ff; color: #fff; padding: 11px 32px;
-            border-radius: 12px; font-weight: bold; cursor: pointer; letter-spacing: 1px;
-            box-shadow: 0 0 12px rgba(0, 240, 255, 0.3); transition: 0.3s; font-family: 'Orbitron', sans-serif;
-            text-decoration: none; display: inline-block;
-        }
-        .neon-glow-btn:hover { background: #00f0ff; color: #000; box-shadow: 0 0 25px #00f0ff; transform: translateY(-2px); }
-
-        /* Circular Hologram Image Neon Container Frame - Fixed with Vignesh's Photo */
-        .avatar-portal-frame { display: flex; justify-content: center; justify-self: center; }
-        .neon-avatar-halo {
-            width: 250px; height: 250px; border-radius: 50%; padding: 5px;
-            background: linear-gradient(135deg, #ff007f, #00f0ff);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.45);
-            overflow: hidden;
-        }
-        .neon-avatar-halo img { 
-            width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 50%; background: #070311; 
-        }
-
-        /* Pink Cyber Progress Slider Track bar design on edge boundary */
-        .pink-edge-slider {
-            position: absolute; right: 20px; top: 35%; width: 4px; height: 140px;
-            background: rgba(255,255,255,0.05); border-radius: 4px;
-        }
-        .slider-core-element {
-            width: 100%; height: 40%; background: #ff007f; box-shadow: 0 0 10px #ff007f;
-            border-radius: 4px; transform: translateY(35px);
-        }
-
-        /* 2-Column Matrix Blocks layout for Project items */
-        .projects-matrix-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;
-        }
-        .project-matrix-node {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(0, 240, 255, 0.15);
-            padding: 20px; border-radius: 12px; border-left: 4px solid #00f0ff; transition: 0.3s;
-        }
-        .project-matrix-node:hover {
-            background: rgba(0, 240, 255, 0.04); border-color: #00f0ff; box-shadow: 0 0 15px rgba(0,240,255,0.2);
-            transform: translateX(4px);
-        }
-
-        /* Contact Panel Inputs matching visual screen elements style layout */
-        .cyber-message-box {
-            display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 380px;
-            background: rgba(255,255,255,0.02); padding: 22px; border-radius: 16px; border: 1px solid rgba(255,0,127,0.15);
-        }
-        .contact-link-node {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 15px; color: #aaa5c1;
-        }
-        .contact-link-node i { color: #00f0ff; font-size: 18px; width: 24px; text-align: center; }
-        .contact-link-node a { color: #00f0ff; text-decoration: none; transition: 0.3s; }
-        .contact-link-node a:hover { color: #ff007f; text-shadow: 0 0 8px #ff007f; }
-
-        .hex-mesh-overlay {
-            position: absolute; bottom: 0; right: 5%; width: 200px; height: 80px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="49" viewBox="0 0 28 49"><path d="M14 0L28 8v16L14 32 0 24V8z" fill="none" stroke="rgba(0,240,255,0.04)" stroke-width="1"/></svg>');
-            pointer-events: none;
-        }
-
-        @media (max-width: 850px) {
-            .panel-structure-grid { grid-template-columns: 1fr; text-align: center; justify-items: center; }
-            .vertical-social-dock { flex-direction: row; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 15px; }
-            .pink-edge-slider { display: none; }
-            .projects-matrix-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vignesh Portfolio</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+body{margin:0;background:#030107;color:white;font-family:Arial,sans-serif}
+.container{max-width:1200px;margin:auto;padding:30px}
+.card{background:#0b0818;border:1px solid #00f0ff33;border-radius:20px;padding:25px;margin-bottom:25px}
+h1,h2{color:#00f0ff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.item{border:1px solid #ffffff22;padding:15px;border-radius:12px}
+img{max-width:100%}
+#profileImage{width:220px;height:220px;border-radius:50%;object-fit:cover}
+.skill{display:inline-block;padding:8px 14px;margin:5px;border:1px solid #00f0ff;border-radius:20px}
+</style>
 </head>
 <body>
+<div class="container">
+<div class="card">
+<h1>Vignesh Portfolio</h1>
+<img id="profileImage" src="" alt="Profile">
+<p id="aboutContent">Loading...</p>
+</div>
 
-<div class="ambient-universe"></div>
+<div class="card">
+<h2>Skills</h2>
+<div id="skillsContainer"></div>
+</div>
 
-<div class="scroll-wrapper">
+<div class="card">
+<h2>Projects</h2>
+<div id="projectsContainer" class="grid"></div>
+</div>
 
-    <div id="home" class="perspective-layout">
-        <div class="neon-card-board" data-tilt-panel>
-            <div class="navigation-top">
-                <div class="curved-bridge">
-                    <a href="#home" class="active">Home</a>
-                    <a href="#about">About Me</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </div>
-            <div class="panel-structure-grid">
-                <div class="vertical-social-dock">
-                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/vignesh-sasikumar-631b47378?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/vickyxz___fx?igsh=MW13eGd4anllbWJ6Zg==" target="_blank"><i class="fab fa-instagram"></i></a>
-                </div>
-                <div class="typography-panel">
-                    <h1>My Personal Portfolio<br>Web <span>Designer</span></h1>
-                    <p>I am Vignesh, a student at Anna University Regional Campus, Madurai. Highly interested in constructing high-performance modern digital frameworks, creative user interfaces, and futuristic design layouts.</p>
-                    <a href="#contact" class="neon-glow-btn">Hire Me</a>
-                </div>
-                <div class="avatar-portal-frame">
-                    <div class="neon-avatar-halo">
-                        <img src="C:\portfolio\WhatsApp Image 2026-06-08 at 12.25.35 PM.jpeg" alt="Vignesh Profile Shield">
-                    </div>
-                </div>
-            </div>
-            <div class="pink-edge-slider"><div class="slider-core-element"></div></div>
-            <div class="hex-mesh-overlay"></div>
-        </div>
-    </div>
-
-    <div id="about" class="perspective-layout">
-        <div class="neon-card-board" data-tilt-panel>
-            <div class="navigation-top">
-                <div class="curved-bridge">
-                    <a href="#home">Home</a>
-                    <a href="#about" class="active">About Me</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </div>
-            <div class="panel-structure-grid" style="grid-template-columns: 1fr;">
-                <div class="typography-panel" style="max-width: 100%;">
-                    <h1>About <span>Me</span></h1>
-                    <p style="font-size: 15.5px; line-height: 1.8; color: #b5b1d2;">
-                        Hi, I am studying at Anna University Regional Campus, Madurai, concentrating on creating aesthetic solutions in the dynamic digital web engineering space. 
-                        Dedicated to exploring front-end layout optimizations, glowing visual components, and modular responsive grids.
-                    </p>
-                    <p style="font-size: 15.5px; line-height: 1.8; color: #a6a1c1; margin-top: 15px;">
-                        I love building interfaces that look futuristic, immersive, and sleek, using semantic front-end code bases to keep layouts completely bug-free across all system platforms.
-                    </p>
-                </div>
-            </div>
-            <div class="hex-mesh-overlay"></div>
-        </div>
-    </div>
-
-    <div id="projects" class="perspective-layout">
-        <div class="neon-card-board" data-tilt-panel>
-            <div class="navigation-top">
-                <div class="curved-bridge">
-                    <a href="#home">Home</a>
-                    <a href="#about">About Me</a>
-                    <a href="#projects" class="active">Projects</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </div>
-            <div class="panel-structure-grid" style="grid-template-columns: 1fr; align-items: start;">
-                <div class="typography-panel">
-                    <h1>My <span>Projects</span></h1>
-                    
-                    <div class="projects-matrix-grid">
-                        <div class="project-matrix-node">
-                            <h3 style="font-family:'Orbitron',sans-serif; color:#00f0ff; margin-bottom:6px;"><i class="fas fa-shirt" style="font-size:16px; margin-right:8px;"></i> T-Shirt Size Bucketing System</h3>
-                            <p style="font-size:13.5px; color:#aaa5c1;">An intelligent automation sorting layout node built to bucket apparel sizes accurately into systematic operational pipelines.</p>
-                        </div>
-                        <div class="project-matrix-node">
-                            <h3 style="font-family:'Orbitron',sans-serif; color:#00f0ff; margin-bottom:6px;"><i class="fas fa-shopping-cart" style="font-size:16px; margin-right:8px;"></i> E-Commerce Website</h3>
-                            <p style="font-size:13.5px; color:#aaa5c1;">A fully responsive secure modern commercial terminal storefront platform featuring interactive catalogs and smooth user experience grids.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="contact" class="perspective-layout">
-        <div class="neon-card-board" data-tilt-panel>
-            <div class="navigation-top">
-                <div class="curved-bridge">
-                    <a href="#home">Home</a>
-                    <a href="#about">About Me</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact" class="active">Contact</a>
-                </div>
-            </div>
-            <div class="panel-structure-grid">
-                <div class="vertical-social-dock" style="visibility: hidden;"></div>
-                <div class="typography-panel">
-                    <h1>Contact <span>Me</span></h1>
-                    
-                    <div class="contact-link-node">
-                        <i class="fas fa-envelope"></i>
-                        <span><strong>Email:</strong> <a href="mailto:vigneshsrii12345@gmail.com">vigneshsrii12345@gmail.com</a></span>
-                    </div>
-                    <div class="contact-link-node">
-                        <i class="fas fa-phone"></i>
-                        <span><strong>Phone:</strong> <a href="tel:+919344180576">+91 9344180576</a></span>
-                    </div>
-                    <div class="contact-link-node">
-                        <i class="fab fa-linkedin"></i>
-                        <span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vignesh-sasikumar-631b47378?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">Vignesh Sasikumar</a></span>
-                    </div>
-                    <div class="contact-link-node">
-                        <i class="fab fa-instagram"></i>
-                        <span><strong>Instagram:</strong> <a href="https://www.instagram.com/vickyxz___fx?igsh=MW13eGd4anllbWJ6Zg==" target="_blank">@vickyxz___fx</a></span>
-                    </div>
-                    <div class="contact-link-node" style="margin-top: 15px;">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Anna University Regional Campus, Madurai</span>
-                    </div>
-                </div>
-                
-                <div class="cyber-message-box">
-                    <input type="text" class="cyber-input-field" placeholder="Your Name">
-                    <input type="email" class="cyber-input-field" placeholder="Your Email Channel">
-                    <textarea class="cyber-input-field" placeholder="Message Payload Data" rows="3"></textarea>
-                    <button class="neon-glow-btn" style="padding:8px; font-size:12.5px; border-color:#ff007f; box-shadow:0 0 10px rgba(255,0,127,0.3)">Transmit Channels</button>
-                </div>
-            </div>
-            <div class="hex-mesh-overlay"></div>
-        </div>
-    </div>
-
+<div class="card">
+<h2>Certificates</h2>
+<div id="certificatesContainer" class="grid"></div>
+</div>
 </div>
 
 <script>
-    // Smooth Mouse Interactive 3D Card Hover Vector Rotation Engine Architecture Setup
-    const panels = document.querySelectorAll('.neon-card-board');
-    panels.forEach(board => {
-        board.addEventListener('mousemove', (e) => {
-            const dimensions = board.getBoundingClientRect();
-            const xOffset = e.clientX - dimensions.left - (dimensions.width / 2);
-            const yOffset = e.clientY - dimensions.top - (dimensions.height / 2);
-            
-            const rotateFactorX = -(yOffset / (dimensions.height / 2)) * 6;
-            const rotateFactorY = (xOffset / (dimensions.width / 2)) * 6;
-            
-            board.style.transform = `rotateX(${rotateFactorX}deg) rotateY(${rotateFactorY}deg) scale3d(1.01, 1.01, 1.01)`;
-        });
+const supabaseUrl="https://gpevmkcqahutzbrjiqrx.supabase.co";
+const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwZXZta2NxYWh1dHpicmppcXJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMjEyMjMsImV4cCI6MjA5NjU5NzIyM30.3vPDMgzPgjH-DJWexhy4-uxROyFTxCyS6cv2DbW-g_Q";
+const supabaseClient=window.supabase.createClient(supabaseUrl,supabaseKey);
 
-        board.addEventListener('mouseleave', () => {
-            board.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-        });
-    });
+async function loadPortfolio(){
+
+const {data:about}=await supabaseClient.from("about_me").select("*").single();
+if(about){
+ document.getElementById("aboutContent").innerText=about.content||"";
+ document.getElementById("profileImage").src=about.image_url||"";
+}
+
+const {data:skills}=await supabaseClient.from("skills").select("*");
+const skillsDiv=document.getElementById("skillsContainer");
+skillsDiv.innerHTML="";
+(skills||[]).forEach(s=>{
+ skillsDiv.innerHTML+=`<span class="skill">${s.skill_name}</span>`;
+});
+
+const {data:projects}=await supabaseClient.from("projects").select("*").order("id",{ascending:false});
+const projectDiv=document.getElementById("projectsContainer");
+projectDiv.innerHTML="";
+(projects||[]).forEach(p=>{
+ projectDiv.innerHTML+=`
+ <div class="item">
+ <img src="${p.image_url||''}">
+ <h3>${p.name}</h3>
+ <p>${p.description||''}</p>
+ </div>`;
+});
+
+const {data:certs}=await supabaseClient.from("certificates").select("*").order("id",{ascending:false});
+const certDiv=document.getElementById("certificatesContainer");
+certDiv.innerHTML="";
+(certs||[]).forEach(c=>{
+ certDiv.innerHTML+=`
+ <div class="item">
+ <img src="${c.image_url||''}">
+ <h3>${c.created_name}</h3>
+ <p>${c.description||''}</p>
+ </div>`;
+});
+}
+loadPortfolio();
 </script>
 </body>
 </html>
+"""
+path = "/mnt/data/index.html"
+Path(path).write_text(html, encoding="utf-8")
+print(path)
