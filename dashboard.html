@@ -535,6 +535,11 @@ type="text"
 id="skillInput"
 placeholder="Enter Skill">
 
+<input
+type="number"
+id="skillPercent"
+placeholder="Skill Percentage">
+
 <button
 class="primary-btn"
 onclick="addSkill()">
@@ -925,14 +930,13 @@ return;
 }
 
 await supabaseClient
-.from(
-"skills"
-)
+.from("skills")
 .insert([{
-
-skill_name:
-skill
-
+skill_name:skill,
+percentage:
+document
+.getElementById("skillPercent")
+.value
 }]);
 
 document
