@@ -210,6 +210,36 @@ color:#00f0ff;
 .container{
 margin-top:80px;
 }
+ .skill-card{
+margin-bottom:20px;
+}
+
+.skill-header{
+display:flex;
+justify-content:space-between;
+margin-bottom:8px;
+font-weight:bold;
+color:white;
+}
+
+.progress-bar{
+width:100%;
+height:12px;
+background:#111827;
+border-radius:30px;
+overflow:hidden;
+}
+
+.progress-fill{
+height:100%;
+background:linear-gradient(
+90deg,
+#ff007f,
+#00f0ff
+);
+border-radius:30px;
+box-shadow:0 0 15px #00f0ff;
+}
 
 </style>
 </head>
@@ -295,11 +325,44 @@ if(about){
  document.getElementById("profileImage").src=about.image_url||"";
 }
 
-const {data:skills}=await supabaseClient.from("skills").select("*");
-const skillsDiv=document.getElementById("skillsContainer");
+const {data:skills}=await supabaseClient
+.from("skills")
+.select("*");
+
+const skillsDiv=
+document.getElementById(
+"skillsContainer"
+);
+
 skillsDiv.innerHTML="";
+
 (skills||[]).forEach(s=>{
- skillsDiv.innerHTML+=`<span class="skill">${s.skill_name}</span>`;
+
+skillsDiv.innerHTML += `
+
+<div class="skill-card">
+
+<div class="skill-header">
+
+<span>${s.skill_name}</span>
+
+<span>${s.percentage}%</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:${s.percentage}%">
+</div>
+
+</div>
+
+</div>
+
+`;
+
 });
 
 const {data:projects}=await supabaseClient.from("projects").select("*").order("id",{ascending:false});
