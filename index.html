@@ -275,6 +275,61 @@ padding-top:120px;
 }
 
 }
+  .home-layout{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:60px;
+margin-top:40px;
+}
+
+.profile-wrapper{
+flex:1;
+display:flex;
+justify-content:center;
+}
+
+.home-content{
+flex:1;
+text-align:left;
+}
+
+.home-content h3{
+font-size:42px;
+margin-bottom:20px;
+color:white;
+}
+
+.home-content p{
+font-size:22px;
+margin:15px 0;
+color:white;
+font-weight:600;
+}
+
+#profileImage{
+width:280px;
+height:280px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #00f0ff;
+box-shadow:0 0 30px #00f0ff;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.home-layout{
+flex-direction:column;
+text-align:center;
+}
+
+.home-content{
+text-align:center;
+}
+
+}
 
 </style>
 </head>
@@ -302,35 +357,29 @@ Resume
 <div class="card" id="home">
 
 <h1>Vignesh Portfolio</h1>
+<div class="home-layout">
 
 <div class="profile-wrapper">
-<img id="profileImage" src="" alt="Profile">
+    <img id="profileImage" src="" alt="Profile">
 </div>
-<div style="
-margin-top:20px;
-line-height:1.8;
-">
 
-<p style="font-size:30px;font-weight:600;">VIGNESH S</p>
+<div class="home-content">
 
-<p style="font-size:18px;font-weight:600;">
-ASPIRING FULL STACK DEVELOPER | STUDENT
-</p>
+<h3>VIGNESH S</h3>
 
-<p style="font-size:18px;font-weight:600;">
-BE Computer Science and Engineering
-</p>
+<p>ASPIRING FULL STACK DEVELOPER | STUDENT</p>
 
-<p style="font-size:18px;font-weight:600;">
-Anna University Regional Campus, Madurai
-</p>
+<p>BE Computer Science and Engineering</p>
 
-<p style="font-size:18px;font-weight:600;">
-2024 - 2028
-</p>
+<p>Anna University Regional Campus, Madurai</p>
+
+<p>2024 - 2028</p>
 
 </div>
+
 </div>
+
+
  <div class="card" id="about">
 
 <h2>About Me</h2>
